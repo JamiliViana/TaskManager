@@ -31,4 +31,9 @@ public class Task {
 
     @Column(nullable = false)
     private String status;
+
+    @PrePersist
+    protected void onCreate() {
+        this.creationDate = new Date();
+    }
 }
