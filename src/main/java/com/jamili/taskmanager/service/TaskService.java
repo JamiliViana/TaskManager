@@ -1,13 +1,12 @@
 package com.jamili.taskmanager.service;
 
-import com.jamili.taskmanager.exceptions.NotFoundException;
+import com.jamili.taskmanager.advice.exceptions.NotFoundException;
 import com.jamili.taskmanager.model.Task;
 import com.jamili.taskmanager.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TaskService {
@@ -26,7 +25,7 @@ public class TaskService {
     public Task updateTask(Long id, Task task){
         Task taskToUpdate = repository.getTaskById(id);
         if (taskToUpdate == null){
-            throw new NotFoundException("Task not found");
+            throw new NotFoundException();
         }
         taskToUpdate.setTitle(task.getTitle());
         taskToUpdate.setDescription(task.getDescription());
@@ -37,7 +36,7 @@ public class TaskService {
     public void deleteTask(Long id){
         Task taskToDelete = repository.getTaskById(id);
         if (taskToDelete == null){
-            throw new NotFoundException("Task not found");
+            throw new NotFoundException();
         }
         repository.delete(taskToDelete);
     }

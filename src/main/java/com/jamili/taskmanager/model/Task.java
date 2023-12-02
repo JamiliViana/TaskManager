@@ -1,6 +1,7 @@
 package com.jamili.taskmanager.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,15 +22,18 @@ public class Task {
     private Long id;
 
     @Column(nullable = false)
+    @NotBlank(message = "Title may not be blank")
     private String title;
 
     @Column(nullable = false)
+    @NotBlank(message = "Description may not be blank")
     private String description;
 
     @Column(nullable = false)
     private Date creationDate;
 
     @Column(nullable = false)
+    @NotBlank(message = "Status may not be blank")
     private String status;
 
     @PrePersist
